@@ -23,6 +23,8 @@
         };
     };
 
+    analytics.SNIPPET_VERSION = '4.0.0';
+
     /**
      * Segment service
      * @param config
@@ -211,7 +213,7 @@
             if (this.config.autoload) {
                 this.debug('Autoloading Analytics.js');
                 if (this.config.apiKey) {
-                    segmentLoader.load(this.config.apiKey, this.config.loadDelay);
+                    segmentLoader.load(this.config.apiKey, this.config.loadDelay, this.config.debug);
                 } else {
                     this.debug(this.config.tag + ' Warning: API key is not set and autoload is not disabled.');
                 }

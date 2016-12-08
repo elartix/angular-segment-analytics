@@ -3,6 +3,8 @@
     "verbose": true,
 
     "validateIndentation": 4,
+	"maximumLineLength": 150,
+	"validateLineBreaks": "CRLF",
     "disallowSpacesInFunctionExpression": null,
     "disallowSpacesInAnonymousFunctionExpression": null,
     "requireSpacesInFunctionExpression": {

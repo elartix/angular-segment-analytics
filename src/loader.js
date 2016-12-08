@@ -4,7 +4,7 @@
 
         this.hasLoaded = hasLoaded || false;
 
-        this.load = function (apiKey, delayMs) {
+        this.load = function (apiKey, delayMs, isDebug) {
             if (window.analytics.initialized) {
                 console.warn('Warning: Segment analytics has already been initialized. Did you already load the library?');
             }
@@ -28,7 +28,7 @@
                         script.src = (document.location.protocol === 'https:'
                                 ? 'https://' : 'http://')
                             + 'cdn.segment.com/analytics.js/v1/'
-                            + apiKey + '/analytics.min.js';
+                            + apiKey + (isDebug ? '/analytics.js' : '/analytics.min.js');
 
                         script.onerror = function () {
                             console.error('Error loading Segment library.');

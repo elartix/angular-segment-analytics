@@ -53,7 +53,7 @@ angular.module('ngSegment').constant('segmentDefaultConfig', {
 
         this.hasLoaded = hasLoaded || false;
 
-        this.load = function (apiKey, delayMs) {
+        this.load = function (apiKey, delayMs, isDebug) {
             if (window.analytics.initialized) {
                 console.warn('Warning: Segment analytics has already been initialized. Did you already load the library?');
             }
@@ -77,7 +77,7 @@ angular.module('ngSegment').constant('segmentDefaultConfig', {
                         script.src = (document.location.protocol === 'https:'
                                 ? 'https://' : 'http://')
                             + 'cdn.segment.com/analytics.js/v1/'
-                            + apiKey + '/analytics.min.js';
+                            + apiKey + (isDebug ? '/analytics.js' : '/analytics.min.js');
 
                         script.onerror = function () {
                             console.error('Error loading Segment library.');
@@ -133,6 +133,8 @@ angular.module('ngSegment').constant('segmentDefaultConfig', {
             return analytics;
         };
     };
+
+    analytics.SNIPPET_VERSION = '4.0.0';
 
     /**
      * Segment service
@@ -322,7 +324,7 @@ angular.module('ngSegment').constant('segmentDefaultConfig', {
             if (this.config.autoload) {
                 this.debug('Autoloading Analytics.js');
                 if (this.config.apiKey) {
-                    segmentLoader.load(this.config.apiKey, this.config.loadDelay);
+                    segmentLoader.load(this.config.apiKey, this.config.loadDelay, this.config.debug);
                 } else {
                     this.debug(this.config.tag + ' Warning: API key is not set and autoload is not disabled.');
                 }
